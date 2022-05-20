@@ -9,7 +9,12 @@
         android:id="@+id/navigation_home"
         android:name="com.example.hw1a2.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+
+        <action
+            android:id="@+id/action_navigation_home_to_secondFragment"
+            app:destination="@id/secondFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,4 +27,14 @@
         android:name="com.example.hw1a2.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/list4Fragment"
+        android:name="com.example.hw1a2.ui.list4.list4Fragment"
+        android:label="list4_fragment"
+        tools:layout="@layout/list4_fragment" />
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.example.hw1a2.SecondFragment"
+        android:label="fragment_second"
+        tools:layout="@layout/fragment_second" />
 </navigation>
