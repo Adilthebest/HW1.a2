@@ -5,20 +5,29 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.hw1a2.News
+import com.example.hw1a2.News_Adapter
 import com.example.hw1a2.R
 import com.example.hw1a2.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
-
+    private lateinit var adapter: News_Adapter
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        adapter = News_Adapter {
+            val news = adapter.getItem(it)
+            Toast.makeText(requireContext(), news.title, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,14 +48,27 @@ class HomeFragment : Fragment() {
         parentFragmentManager.setFragmentResultListener(
             "rk_news",
             viewLifecycleOwner
-        ) { key, bundle ->
-            val text = bundle.getString("text")
-            Log.e("Home","text$text")
+        ) { _, bundle ->
+            val news = bundle.getSerializable("news") as News
+            Log.e("Home", "text - $news")
+            adapter.addItem(news)
+
+
+
+            binding.recycleView.adapter = adapter
+        }
+
+
+    }
+        override fun onDestroyView() {
+            super.onDestroyView()
+            _binding = null
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-}
+
+
+
+
+
+
