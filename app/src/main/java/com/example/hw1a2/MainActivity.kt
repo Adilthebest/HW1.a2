@@ -13,9 +13,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.hw1a2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
@@ -38,25 +38,31 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
+        navController.navigate(R.id.boardFragment)
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            val fragment = arrayListOf(
+            val fragments = arrayOf(
                 R.id.navigation_home,
-                R.id.navigation_dashboard,
                 R.id.navigation_notifications,
+                R.id.navigation_dashboard,
                 R.id.list4Fragment
             )
-            if (fragment.contains(destination.id)) {
+            if (fragments.contains(destination.id)) {
                 navView.visibility = View.VISIBLE
+
             } else {
                 navView.visibility = View.GONE
             }
+            if (destination.id == R.id.boardFragment)
+                supportActionBar?.hide()
+            else
+                supportActionBar?.show()
+
+
         }
     }
-            override fun onSupportNavigateUp(): Boolean {
-                return navController.navigateUp()
-            }
-        }
 
-
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp()
+    }
+}

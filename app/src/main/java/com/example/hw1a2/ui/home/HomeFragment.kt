@@ -1,5 +1,6 @@
 package com.example.hw1a2.ui.home
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,21 +24,15 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = News_Adapter {
-            val news = adapter.getItem(it)
-            Toast.makeText(requireContext(), news.title, Toast.LENGTH_SHORT).show()
-        }
-    }
 
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,23 +47,46 @@ class HomeFragment : Fragment() {
             val news = bundle.getSerializable("news") as News
             Log.e("Home", "text - $news")
             adapter.addItem(news)
-
-
-
             binding.recycleView.adapter = adapter
         }
+        binding.recycleView.adapter = adapter
 
+        rename()
+        alert()
 
     }
-        override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
+
+    private fun alert() {
+
+        adapter.onLongClick = {
+
+            val dialog = AlertDialog.Builder(context)
+            dialog.setTitle("Delet project list")
+            dialog.setMessage("You want to delete project?")
+            dialog.setPositiveButton("Yes") { _, _ ->
+
+                adapter.deleteItemsAndNotifyAdapter(it)
+                binding.recycleView.adapter = adapter
+                //Delete items in RecyclerView**
+
+            }
+            dialog.setNegativeButton("Cancel") {dialog, _ -> dialog.cancel()}
+            dialog.show()
         }
     }
 
 
+    private fun rename() {
+        adapter.onClick = {
+            val bundle = Bundle()
+            bundle.putString("key1", it.title)
+            findNavController().navigate(R.id.secondFragment, bundle)
+        }
+    }
 
 
-
-
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}
