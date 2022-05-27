@@ -24,6 +24,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        adapter = News_Adapter()
 
     }
     override fun onCreateView(

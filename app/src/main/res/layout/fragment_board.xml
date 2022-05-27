@@ -3,23 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".BoardFragment">
-
-    <me.relex.circleindicator.CircleIndicator3
-        android:id="@+id/indicator"
-        android:layout_alignParentBottom="true"
-        android:background="@color/black"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"/>
-
-
 
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
-        android:layout_above="@id/indicator"
-        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_above="@id/circle"
+        android:layout_centerInParent="true" />
+
+    <me.relex.circleindicator.CircleIndicator3
+        android:layout_alignParentBottom="true"
+        android:id="@+id/circle"
+        android:background="@color/teal_200"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"/>
+
+    <TextView
+        android:id="@+id/skipped"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:padding="16dp"
+        android:text="skip" />
+
 
 </RelativeLayout>

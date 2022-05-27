@@ -32,6 +32,11 @@ class SecondFragment : Fragment() {
         binding.btnsave.setOnClickListener {
             save()
         }
+        rename()
+    }
+        private fun rename() {
+            val editText = arguments?.getString("key1")
+            binding.edit.setText(editText)
     }
 
     private fun save() {
