@@ -14,6 +14,8 @@ import com.example.hw1a2.News
 import com.example.hw1a2.News_Adapter
 import com.example.hw1a2.R
 import com.example.hw1a2.databinding.FragmentHomeBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HomeFragment : Fragment() {
     private lateinit var adapter: News_Adapter
@@ -49,9 +51,9 @@ class HomeFragment : Fragment() {
             Log.e("Home", "text - $news")
             adapter.addItem(news)
             binding.recycleView.adapter = adapter
+
         }
         binding.recycleView.adapter = adapter
-
         rename()
         alert()
 
@@ -84,6 +86,8 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.secondFragment, bundle)
         }
     }
+    fun getTodayDate(): String {
+        return SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())}
 
 
     override fun onDestroyView() {

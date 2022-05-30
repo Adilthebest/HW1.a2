@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hw1a2.databinding.ItemNewsBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class News_Adapter: RecyclerView.Adapter<News_Adapter.NewsViewHolder>() {
     private val list = arrayListOf<News>()
@@ -51,7 +53,9 @@ class News_Adapter: RecyclerView.Adapter<News_Adapter.NewsViewHolder>() {
 
     }
 
-
+    fun getTodayDate(): String {
+        return SimpleDateFormat("h:mm:dd:MMMM :yyyy", Locale.getDefault()).format(Date())
+    }
     fun deleteItemsAndNotifyAdapter(pos: Int) {
         list.removeAt(pos)
         notifyItemRemoved(pos)
@@ -59,18 +63,24 @@ class News_Adapter: RecyclerView.Adapter<News_Adapter.NewsViewHolder>() {
 
     inner class NewsViewHolder(private var binding: ItemNewsBinding) ://
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(news: News) {
             binding.textTitle.text = news.title
             itemView.setOnClickListener {
                 onClick?.invoke(news)
+
             }
+            binding.todayDateTv.text = getTodayDate()
             itemView.setOnLongClickListener {
                 onLongClick?.invoke(adapterPosition)// учесть и не забыть!!!!
                 return@setOnLongClickListener true
+
             }
+
         }
     }
 }
+
 
 
 

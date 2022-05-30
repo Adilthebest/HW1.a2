@@ -1,4 +1,4 @@
-package com.example.hw1a2
+package com.example.hw1a2.ui.board
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
+import com.example.hw1a2.Prefs
+import com.example.hw1a2.R
 import com.example.hw1a2.databinding.FragmentBoardBinding
-import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import me.relex.circleindicator.CircleIndicator3
 
 class BoardFragment : Fragment() {
@@ -26,13 +26,14 @@ class BoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = BoardAdapter(findNavController())
+        val adapter = BoardAdapter(requireContext(),findNavController())
         binding.viewPager.adapter = adapter
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
             activity?.finish()
 
         }
         binding.skipped.setOnClickListener {
+            Prefs(requireContext()).saveState()
             findNavController().navigateUp()
 
 

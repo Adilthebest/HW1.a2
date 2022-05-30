@@ -23,5 +23,15 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="240dp"
         android:layout_height="200dp"/>
-
+<EditText
+    android:id="@+id/edittext"
+android:layout_margin="20dp"
+    android:textSize="24sp"
+    android:textColor="@color/white"
+    android:background="@color/sera"
+    app:layout_constraintTop_toBottomOf="@id/btnimage"
+    app:layout_constraintEnd_toEndOf="parent"
+  app:layout_constraintStart_toStartOf="parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
