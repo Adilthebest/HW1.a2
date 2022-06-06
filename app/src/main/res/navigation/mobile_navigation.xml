@@ -34,7 +34,7 @@
         tools:layout="@layout/list4_fragment" />
     <fragment
         android:id="@+id/secondFragment"
-        android:name="com.example.hw1a2.SecondFragment"
+        android:name="com.example.hw1a2.NewsFragment"
         android:label="fragment_second"
         tools:layout="@layout/fragment_second" />
     <fragment

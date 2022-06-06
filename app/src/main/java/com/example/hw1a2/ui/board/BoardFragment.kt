@@ -35,8 +35,6 @@ class BoardFragment : Fragment() {
         binding.skipped.setOnClickListener {
             Prefs(requireContext()).saveState()
             findNavController().navigateUp()
-
-
         }
 binding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         val indicator : CircleIndicator3? = activity?.findViewById<CircleIndicator3>(R.id.circle)

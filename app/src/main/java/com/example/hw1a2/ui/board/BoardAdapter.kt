@@ -15,7 +15,7 @@ class BoardAdapter(val context: Context ,val  navController: NavController) :
 
 
     private val list = arrayListOf("Hello","Привет","Салам")
-    private val image = arrayListOf(R.drawable.img_3, R.drawable.img_4, R.drawable.img_2)
+    private val image = arrayListOf(R.raw.lotti_anim_one,R.raw.lotti_anim_two,R.raw.lotti_anim_three)
 
     private val text = arrayListOf("Здраствуйте ","как дела?"," ты очень красивая")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -45,7 +45,7 @@ class BoardAdapter(val context: Context ,val  navController: NavController) :
         fun bind(position: Int) {
             binding.textTittle.text = list[position]
             binding.textDesc.text = text[position]
-            binding.imageView.setImageResource(image[position])
+            binding.lottione.setAnimation(image[position])
             if (position == text.lastIndex) {
                 binding.btnStart.visibility = View.VISIBLE
             } else {

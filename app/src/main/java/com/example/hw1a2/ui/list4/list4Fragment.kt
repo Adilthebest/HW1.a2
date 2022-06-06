@@ -1,6 +1,9 @@
 package com.example.hw1a2.ui.list4
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Editable
@@ -20,6 +23,7 @@ class list4Fragment : Fragment() {
 
     private lateinit var binding: List4FragmentBinding
 
+    private lateinit var mSetting: SharedPreferences
     private lateinit var launcher: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
@@ -27,7 +31,7 @@ class list4Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = List4FragmentBinding.inflate(inflater,container,false)
+        binding = List4FragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -35,24 +39,25 @@ class list4Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initLauncher()
         initListener()
-        saveName()
-    }
-    private fun saveName() {
-        binding.edittext.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
+       // saver()
+       // loadet()
+        
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                context?.let { Prefs(it).saveNames(s.toString()) };
-                //prefs.saveNames(s.toString());
-            }
-        })
-        binding.edittext.setText(context?.let { Prefs(it).getName() })
-        //binding.editText.setText(prefs.getName());
     }
+ //   @SuppressLint("CommitPrefEdits")
+ //   fun saver() {
+ //       binding.btnimage.setOnClickListener {
+   //         mSetting = requireActivity().getPreferences(android.content.Context.MODE_PRIVATE)
+     //       val editor: SharedPreferences.Editor = mSetting.edit()
+       //     editor.putString("key3", binding.edittext.text.toString())
+         //   editor.apply()
+
+        //}
+    //}
+    //fun loadet(){
+      //  mSetting = requireActivity().getPreferences(Context.MODE_PRIVATE)
+        //val saveText = mSetting.getString("key3","")
+        //binding.edittext.setText(saveText)
 
     private fun initListener() {
         binding.btnimage.setOnClickListener {
@@ -73,8 +78,6 @@ class list4Fragment : Fragment() {
                 }
             }
         }
-
     }
-
-
 }
+

@@ -9,7 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.hw1a2.databinding.FragmentSecondBinding
 
-class SecondFragment : Fragment() {
+class NewsFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
@@ -41,7 +41,8 @@ class SecondFragment : Fragment() {
 
     private fun save() {
         val text = binding.edit.text.toString()
-        val news = News(text,System.currentTimeMillis())
+        val news = News(0,text,System.currentTimeMillis())
+        App.dataBase.newsDao().insert(news)
         val bundle = bundleOf("news" to news)
         parentFragmentManager.setFragmentResult("rk_news" , bundle)
         findNavController().navigateUp()

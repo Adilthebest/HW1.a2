@@ -1,14 +1,15 @@
-package com.example.hw1a2
+package com.example.hw1a2.ui.home
 
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hw1a2.News
 import com.example.hw1a2.databinding.ItemNewsBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class News_Adapter: RecyclerView.Adapter<News_Adapter.NewsViewHolder>() {
+class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     private val list = arrayListOf<News>()
     var onClick: ((News) -> Unit)? = null
     var onLongClick: ((Int) -> Unit)? = null
@@ -46,20 +47,30 @@ class News_Adapter: RecyclerView.Adapter<News_Adapter.NewsViewHolder>() {
             notifyItemInserted(list.indexOf(news))
 
         }
+
     }
 
     fun getItem(it: Int): News {
         return list[it]
 
     }
+    fun addItems(list: List<News>) {
+        this.list.addAll(list)
+        notifyDataSetChanged()
+
+    }
 
     fun getTodayDate(): String {
-        return SimpleDateFormat("h:mm:dd:MMMM :yyyy", Locale.getDefault()).format(Date())
+        return SimpleDateFormat("hh:mm,dd MMMM yyyy", Locale.getDefault()).format(Date())
     }
     fun deleteItemsAndNotifyAdapter(pos: Int) {
         list.removeAt(pos)
         notifyItemRemoved(pos)
     }
+
+
+
+
 
     inner class NewsViewHolder(private var binding: ItemNewsBinding) ://
         RecyclerView.ViewHolder(binding.root) {
