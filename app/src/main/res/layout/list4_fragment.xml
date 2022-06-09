@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.list4.list4Fragment">
 
-    saber, [06.06.2022 15:35]
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -100,7 +99,6 @@
         app:layout_constraintStart_toStartOf="@+id/lay"
         app:layout_constraintTop_toTopOf="@+id/lay" />
 
-    saber, [06.06.2022 15:35]
     <EditText
         android:id="@+id/nameEdit"
         android:layout_width="94dp"

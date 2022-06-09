@@ -2,6 +2,7 @@ package com.example.hw1a2
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -10,11 +11,44 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.hw1a2.App.Companion.AUTH
 import com.example.hw1a2.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private lateinit var mToolbar: Toolbar
+    private lateinit var mAppDrawer: AppDrawer
+
+
+    override fun onStart() {
+        super.onStart()
+        initFunc()
+        initFields()
+
+    }
+
+    private fun initFunc() {
+        if (AUTH.currentUser!=null){
+            setSupportActionBar(mToolbar)
+            mAppDrawer.create()
+            replaceFragment(ChatsFragment(),false)
+        } else {
+            replaceActivity(RegisterActivity())
+        }
+    }
+
+
+    private fun initFields() {
+        mToolbar = binding.mainToolbar
+        mAppDrawer = AppDraver(this,mToolbar)
+        AUTH = FirebaseAuth.getInstance()
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,35 +71,43 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-//if(!Prefs(this).isShown()){
-    navController.navigate(R.id.boardFragment)
-
-
-
-
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            val fragments = arrayOf(
-                R.id.navigation_home,
-                R.id.navigation_notifications,
-                R.id.navigation_dashboard,
-                R.id.list4Fragment
-            )
-            if (fragments.contains(destination.id)) {
-                navView.visibility = View.VISIBLE
-
-            } else {
-                navView.visibility = View.GONE
+        if (!Prefs(this).isShown()) {
+            if (Firebase.auth.currentUser == null) {
+                navController.navigate(R.id.auchFragment)
             }
-            if (destination.id == R.id.boardFragment)
-                supportActionBar?.hide()
-            else
-                supportActionBar?.show()
+            navController.navigate(R.id.boardFragment)
 
 
+
+
+            navController.addOnDestinationChangedListener { controller, destination, arguments ->
+                val fragments = arrayOf(
+                    R.id.navigation_home,
+                    R.id.navigation_notifications,
+                    R.id.navigation_dashboard,
+                    R.id.list4Fragment
+                )
+                if (fragments.contains(destination.id)) {
+                    navView.visibility = View.VISIBLE
+
+                } else {
+                    navView.visibility = View.GONE
+                }
+                if (destination.id == R.id.boardFragment)
+                    supportActionBar?.hide()
+                else
+                    supportActionBar?.show()
+
+
+            }
         }
     }
+        override fun onSupportNavigateUp(): Boolean {
+            return navController.navigateUp()
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp()
     }
+}
+
+class AppDrawer {
+
 }

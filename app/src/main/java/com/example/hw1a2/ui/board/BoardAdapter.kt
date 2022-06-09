@@ -46,7 +46,8 @@ class BoardAdapter(val context: Context ,val  navController: NavController) :
             binding.textTittle.text = list[position]
             binding.textDesc.text = text[position]
             binding.lottione.setAnimation(image[position])
-            if (position == text.lastIndex) {
+            if
+                    (position == text.lastIndex) {
                 binding.btnStart.visibility = View.VISIBLE
             } else {
                 binding.btnStart.visibility = View.INVISIBLE

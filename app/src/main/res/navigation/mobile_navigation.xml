@@ -46,4 +46,9 @@
             android:id="@+id/action_boardFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
+    <fragment
+        android:id="@+id/auchFragment"
+        android:name="com.example.hw1a2.auth.AuchFragment"
+        android:label="fragment_auch"
+        tools:layout="@layout/fragment_auch" />
 </navigation>
